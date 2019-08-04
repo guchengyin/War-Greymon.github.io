@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/War-Greymon.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/War-Greymon.github.io/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/War-Greymon.github.io/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/War-Greymon.github.io/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/War-Greymon.github.io/images/feng.jpg?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/War-Greymon.github.io/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/War-Greymon.github.io/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="上一篇介绍了Node类型，那么这一篇我们来继续介绍其他的类型  Document类型在JavaScript中，document类型表示文档，根据上一篇我们知道，document的对象是HTMLDocument（继承自Document类型），表示整个HTML实例。">
+<meta name="keywords" content="-红皮书">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript高程学习-DOM（二）">
+<meta property="og:url" content="https://guchengyin.github.io/guchengyin.github.io/War-Greymon.github.io/2019/08/04/javascript高程学习-DOM（二）/index.html">
+<meta property="og:site_name" content="War-Greymon&#39;s studio">
+<meta property="og:description" content="上一篇介绍了Node类型，那么这一篇我们来继续介绍其他的类型  Document类型在JavaScript中，document类型表示文档，根据上一篇我们知道，document的对象是HTMLDocument（继承自Document类型），表示整个HTML实例。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526140337713.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526140352130.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526142512849.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526142840601.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019052616492917.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526165009940.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019052617051254.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526170524624.png">
+<meta property="og:updated_time" content="2019-08-04T14:06:10.782Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript高程学习-DOM（二）">
+<meta name="twitter:description" content="上一篇介绍了Node类型，那么这一篇我们来继续介绍其他的类型  Document类型在JavaScript中，document类型表示文档，根据上一篇我们知道，document的对象是HTMLDocument（继承自Document类型），表示整个HTML实例。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190526140337713.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://guchengyin.github.io/guchengyin.github.io/War-Greymon.github.io/2019/08/04/javascript高程学习-DOM（二）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>javascript高程学习-DOM（二） | War-Greymon's studio</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://guchengyin.github.io/War-Greymon.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/War-Greymon.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">War-Greymon's studio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Navigationsleiste an/ausschalten">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/War-Greymon.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/War-Greymon.github.io/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/War-Greymon.github.io/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/War-Greymon.github.io/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://guchengyin.github.io/guchengyin.github.io/War-Greymon.github.io/War-Greymon.github.io/2019/08/04/javascript高程学习-DOM（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="War-Greymon">
+      <meta itemprop="description" content="An excellent front-end Engineer">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEMhc_k4SLYULPc6uU12vLi6zJzRNdqPxfdJnzPRKCgAKJCsv5_g">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="War-Greymon's studio">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">javascript高程学习-DOM（二）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Erstellt: 2019-08-04 21:59:57 / Geändert am: 22:06:10" itemprop="dateCreated datePublished" datetime="2019-08-04T21:59:57+08:00">2019-08-04</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/War-Greymon.github.io/categories/DOM/" itemprop="url" rel="index"><span itemprop="name">-DOM</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>上一篇介绍了Node类型，那么这一篇我们来继续介绍其他的类型</p>
+</blockquote>
+<h1 id="Document类型"><a href="#Document类型" class="headerlink" title="Document类型"></a>Document类型</h1><p>在JavaScript中，document类型表示文档，根据上一篇我们知道，document的对象是HTMLDocument（继承自Document类型），表示整个HTML实例。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//接下来是一些其本身的属性：</span><br><span class="line">nodeType=9</span><br><span class="line">nodeName=#document</span><br><span class="line">nodeValue=null</span><br><span class="line">parentNode=null</span><br><span class="line">ownerDocument=null</span><br><span class="line">其子节点可能是Document、Element、ProcessingInstruction或Comment。</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-文档的子节点"><a href="#1-文档的子节点" class="headerlink" title="1.文档的子节点"></a>1.文档的子节点</h2><p>其子节点可能是Document、Element、ProcessingInstruction或Comment。<br>除了上面的子节点还有两个内置的访问其子节点的快捷方式。<br><strong>documentElement和childNode列表访问文档元素</strong><br>该属性始终指向HTML文档中的<code>&lt;html&gt;</code>元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var html = document.documentElement;</span><br><span class="line">        alert(html === document.childNodes[0]);</span><br><span class="line">        alert(html === document.firstChild);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/20190526140337713.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190526140352130.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>由上面的可以看出来documentElement、firstChild和childNodes[0]的属性值相同，都指向<code>&lt;html&gt;</code></p>
+</blockquote>
+<p> 除此之外，document对象还有一个body属性，直接指向<code>&lt;body&gt;</code>元素<br><img src="https://img-blog.csdnimg.cn/20190526142512849.png" alt="在这里插入图片描述"><br>与之类似的还有document.doctype<br>其访问的是<code>&lt;!DOCTYPE&gt;</code></p>
+<p><img src="https://img-blog.csdnimg.cn/20190526142840601.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>但是这个方法在不同浏览器中的反应不尽相同</p>
+</blockquote>
+<p><strong>在IE8以前的版本中文档类型声明会被解释为一个注释并且把它当做Comment节点，其值也就始终为null了</strong>；<br><strong>IE9+和Firefox：如果存在文档类型说明（&lt;!DOCTYPE&gt;）浏览器将会把它当做文档的第一个子节点</strong><br><strong>Safari、Chorme和Opera：如果存在文档类型说明，会将其解析，但是不会作为文档的子节点。</strong></p>
+<blockquote>
+<p><strong> 由此可知，这个属性在不同的浏览器中使用时，会有不同的反应，故此这个的属性会有局限性。</strong></p>
+</blockquote>
+<p>在这里，我想提出一个问题，就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 第一条注释--&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;!-- 第二条注释--&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>问题：这段代码有几个子节点？分别是什么？</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>IE8及以前版本：3个(只会为第一个注释创建节点)</strong><br><strong>IE9及更高版本：4个(会为两个注释都创建节点)</strong><br><strong>Firefox以及Safari3.1之前版本：2个（会完全忽略这两个节点）</strong></p>
+</blockquote>
+<h2 id="2-文档信息"><a href="#2-文档信息" class="headerlink" title="2.文档信息"></a>2.文档信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//取得完整的URl</span><br><span class="line">document.URL</span><br><span class="line">//取到域名</span><br><span class="line">document.domain</span><br><span class="line">//取得来源页面的URL</span><br><span class="line">document.referrer</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>domain在页面上传到服务器时才可以使用，而URL在本地时也可以使用。</strong><br>使用domain时有几点需要注意：<br>1.不能设置URL中不包含的域<br>2.一开始是概括的的，后面设置时就不能设置比前面更详细的的域名</p>
+</blockquote>
+<h2 id="3-查找元素"><a href="#3-查找元素" class="headerlink" title="3.查找元素"></a>3.查找元素</h2><p>getElementsByTagName();(接收的参数为元素的标签名)<br>getElementById();（接受的参数为元素的ID属性）<br>getElementByName();（接受到的参数为元素的name的属性值）</p>
+<blockquote>
+<p>当第一种方法接收到的参数为*时，星号表示全部元素。</p>
+</blockquote>
+<p>这三种方法是<strong>最常用的方法</strong>来查找元素。</p>
+<blockquote>
+<p>而第二种方法在IE7及之前会返回<strong>name</strong>属性的元素。<br>即在文档中，有一个ID属性，和一个与ID属性值相同的name属性元素，那么在查找元素时，就会将它们同时返回。就会导致查找不精确的问题。<br>而这第三种方法只能在HTMLDocument类型才有的方法。即只有存在Name属性才可以使用这种方法。</p>
+</blockquote>
+<h2 id="4-文档写入"><a href="#4-文档写入" class="headerlink" title="4.文档写入"></a>4.文档写入</h2><p>文档写入一共有四种方法：write()、writeln（）、open（）、close（）。<br>区别：write和wroteln是两种差不多的方法，但是在写入文档时，writeln会比write多产生一个换行符。<br>open()和close()是打开和关闭文档的输出流。基本很少使用。</p>
+<h1 id="Element类型"><a href="#Element类型" class="headerlink" title="Element类型"></a>Element类型</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nodeType=1;</span><br><span class="line">nodeValue=null;</span><br><span class="line">nodeName=元素标签名；</span><br><span class="line">parentNode=Element或Document;</span><br><span class="line">子节点：Element,ProncessingInstruction,CDATASection或EntityReferfence.</span><br></pre></td></tr></table></figure>
+<p>访问标签名 ：nodeName属性\ tagname属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var div=document.getElementByid(&quot;myDiv&quot;);</span><br><span class="line">alert(div.tagName);			//&quot;DIV&quot;</span><br><span class="line">alert(div.tagName==div.nodeName);			//true</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码表示元素标签名等于元素节点名。<br>元素的某些属性信息可以由JS代码直接获取（只有公认的属性才会可以由JS代码直接获取）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var div= document.getElementById(&quot;div&quot;);</span><br><span class="line">alert(div.id);		//&quot;div&quot;</span><br><span class="line">alert(div.className);		//&quot;bd&quot;</span><br><span class="line">alert(div.title);		//&quot;Body text&quot;</span><br><span class="line">alert(div.lang);			//&quot;en&quot;</span><br><span class="line">alert(div.dir);			//&quot;ltr&quot;</span><br></pre></td></tr></table></figure></p>
+<p>与此同时，我们也可以为其<strong>设置新的值</strong>，便可以<em>修改</em>对应的<strong>每个特性</strong>。</p>
+<h2 id="取得属性"><a href="#取得属性" class="headerlink" title="取得属性"></a>取得属性</h2><p>每一种元素都有其<strong>相应一种或多种特性</strong>，这些特性的用途是给出相应元素或其内容的<strong>附加信息</strong>。<br>在DOM中，有这样几种方法可以操作这些特性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getAttribute（）; 		//查</span><br><span class="line">setAttribute（）;			//	添 Or 改</span><br><span class="line">removeAttribute（）;			// 删</span><br></pre></td></tr></table></figure></p>
+<p>首先，我们来说一下 <strong>查</strong> getAttribute()这个东西。</p>
+<blockquote>
+<p>注意：特性的名称是不区分大小写的，即”ID”和”id”表示的是同一种特性。</p>
+</blockquote>
+<p>看下面的这段代码<br><img src="https://img-blog.csdnimg.cn/2019052616492917.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190526165009940.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2019052617051254.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190526170524624.png" alt="在这里插入图片描述"><br>具体使用方法为<strong>someNode.getAttribute(“所需获取的元素属性”)</strong></p>
+<blockquote>
+<p>注意： 有两类特性对应的属性名， style和onclick这样的事件处理程序</p>
+</blockquote>
+<p>好了，我们现在已经可以查到了某个元素的具体属性值了，现在我们想要改变它，或者在它之后添加一点新的东西。那该怎么办呢？？？<br>这时，我们就可以搬出我们的<strong>setAttribute</strong>()。<br>使用这种方法，需要注意两种情况：<br>①：要设置的元素的特性名和值原来已经存在，那么这种方法将会修改它本身。<br>②：要设置的元素的特性名和值原来在文档中不存在，那么这种方法将会添加新的元素，这个元素有着独特的特性名以及值。</p>
+<p>最后一种是删除特性的工具removeattribute()</p>
+<p>##attribute属性<br><strong>Element</strong>类型是使用attribute属性中包含一个<strong>NamedNodeMap</strong>,与Nodelist类似，也是个“动态”的集合。元素的每个特性都由一个Attr节点表示，每个节点保存在<strong>NameNodeMap</strong>对象中。</p>
+<p>NameNodeName对象的方法为：</p>
+<ul>
+<li>getNameItem(name):返回nodeName属性等于name的节点；</li>
+<li>removeNameitem(name)：从列表中移除nodeName属性等于name的节点；</li>
+<li>setNameItem(node):向列表中添加节点，以节点的nodeName属性为索引；  </li>
+<li>item（pos）:返回位于数字pos位置处的节点。<h2 id="创建元素"><a href="#创建元素" class="headerlink" title="创建元素"></a>创建元素</h2>使用Document.createElement()方法可以创建新元素。该方法只接受一个参数，即需要创建元素的标签名。<blockquote>
+<p>这个标签名在HTML文档里不区分大小写。</p>
+</blockquote>
+</li>
+</ul>
+<p>在使用createElement（）方法创建新元素的同时，也为新元素设置了ownerDocument属性。所以，在这个基础上没我们还可以操作元素的特行，为它添加更多子节点，以及执行更多操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div.id=&quot; myNewDiv&quot;;</span><br><span class="line">div.className=&quot;box&quot;;</span><br><span class="line">document.body.appendChild(div);</span><br></pre></td></tr></table></figure></p>
+<h1 id="Text类型"><a href="#Text类型" class="headerlink" title="Text类型"></a>Text类型</h1><p>text节点有以下几种特征：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nodeType=3;</span><br><span class="line">nodeName=#text;</span><br><span class="line">nodeValue的值为其所包含的文本</span><br><span class="line">parentNode是一个Element；</span><br><span class="line">没有子节点；</span><br></pre></td></tr></table></figure></p>
+<p>可以通过NodeValue属性或Data属性访问Text节点包含的文本。<br>-</p>
+<ul>
+<li>appendData(text):</li>
+<li>deleteData(offset,count)</li>
+<li>insertData(offset,count)</li>
+<li>replaceData(offset,count)<br>以上几种方法中的offset 都是目标位置偏移量进行操作，count是操作的数量。<br>1.创建文本节点只需要创建文本节点，在将其差文本节点插入到需要插入的父级元素中即可。<br>2.切割文本节点只需要使用normalize()相反的方法。这样就会使节点从指定节点分成两个节点。<h1 id="——END——"><a href="#——END——" class="headerlink" title="——END——"></a>——END——</h1></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/War-Greymon.github.io/tags/红皮书/" rel="tag"><i class="fa fa-tag"></i> -红皮书</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/War-Greymon.github.io/2019/08/04/javascript高程学习-DOM（一）/" rel="next" title="javascript高程学习-DOM（一)">
+                <i class="fa fa-chevron-left"></i> javascript高程学习-DOM（一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEMhc_k4SLYULPc6uU12vLi6zJzRNdqPxfdJnzPRKCgAKJCsv5_g" alt="War-Greymon">
+            
+              <p class="site-author-name" itemprop="name">War-Greymon</p>
+              <div class="site-description motion-element" itemprop="description">An excellent front-end Engineer</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/War-Greymon.github.io/archives">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/War-Greymon.github.io/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/War-Greymon.github.io/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">schlagwörter</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Document类型"><span class="nav-number">1.</span> <span class="nav-text">Document类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-文档的子节点"><span class="nav-number">1.1.</span> <span class="nav-text">1.文档的子节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文档信息"><span class="nav-number">1.2.</span> <span class="nav-text">2.文档信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-查找元素"><span class="nav-number">1.3.</span> <span class="nav-text">3.查找元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文档写入"><span class="nav-number">1.4.</span> <span class="nav-text">4.文档写入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Element类型"><span class="nav-number">2.</span> <span class="nav-text">Element类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#取得属性"><span class="nav-number">2.1.</span> <span class="nav-text">取得属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建元素"><span class="nav-number">2.2.</span> <span class="nav-text">创建元素</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Text类型"><span class="nav-number">3.</span> <span class="nav-text">Text类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#——END——"><span class="nav-number">4.</span> <span class="nav-text">——END——</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">War-Greymon</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/War-Greymon.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/War-Greymon.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/War-Greymon.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/War-Greymon.github.io/js/utils.js?v=7.1.0"></script>
+
+  <script src="/War-Greymon.github.io/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/War-Greymon.github.io/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/War-Greymon.github.io/js/scrollspy.js?v=7.1.0"></script>
+<script src="/War-Greymon.github.io/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/War-Greymon.github.io/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
